@@ -1,0 +1,35 @@
+<p-toast />
+<p-confirmDialog />
+<div style=" width: 70%; margin: 40px auto; margin-top: 0;">
+<p-dataView [value]="books">
+    <ng-template pTemplate="list" let-books>
+        <div class="grid grid-nogutter">
+            <div class="col-12" *ngFor="let item of books; let first = first">
+                <div class="flex flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                    <!-- Tracked Book Section -->
+                    <div class="tracked-book-container">
+                        <app-tracked-book [bookId]="item.bookId"></app-tracked-book>
+                    </div>
+            
+                    <!-- Steps Section -->
+                    <div class="steps-container">
+                        <p-steps 
+                            class="w-8"
+                            [model]="items" 
+                            [readonly]="false" 
+                            [activeIndex]="getStatusNumber(item.status)" 
+                            (activeIndexChange)="onActiveIndexChange($event, item)"
+                        ></p-steps>
+                    </div>
+            
+                    <!-- Button Section -->
+                    <div class="button-container">
+                        <p-button icon="pi pi-trash" (onClick)="confirm1($event,item.id)" [outlined]="true"></p-button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </ng-template>
+</p-dataView>
+</div>

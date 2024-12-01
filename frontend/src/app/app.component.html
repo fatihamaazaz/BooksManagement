@@ -1,0 +1,63 @@
+<div class="header-container">
+    <div class="menubar-container">
+    <p-menubar class="menu" autoHide="true">
+        <ng-template pTemplate="start">
+            <a href="#" style="display: flex; align-items: center; justify-content: center; color: inherit; text-decoration: none;">
+                <img src="assets/book.png" height="40">
+                <span class="app-title" style="font-size: 1.2rem; color: white;">Books Management</span>
+            </a>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <a *ngIf="!loginService.isLoggedIn()" href="javascript:void(0)" (click)="showLoginDialog()"
+            style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit; font-size: 1rem; margin-right: 10px;" >
+                <i class="pi pi-sign-in" style="font-size: 1.2rem; color: white;"></i>
+                <span style="color: white;">Login</span>
+            </a>
+            <a *ngIf="loginService.isLoggedIn()" href="javascript:void(0)" (click)="menu.toggle($event)"
+            style="display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit; font-size: 1rem; margin-right: 10px;" >
+                <i class="pi pi-user" style="font-size: 1.2rem; color: white;"></i>
+                <p-menu #menu [model]="items" [popup]="true">
+                    <ng-template pTemplate="item" let-item>
+                        <ng-container *ngIf="item.route; else urlRef">
+                            <a [routerLink]="item.route" class="p-menuitem-link">
+                                <span [class]="item.icon"></span>
+                                <span class="ml-2">{{ item.label }}</span>
+                            </a>
+                        </ng-container>
+                        <ng-template #urlRef>
+                            <a *ngIf="item.url; else noLink" [href]="item.url" class="p-menuitem-link">
+                                <span [class]="item.icon"></span>
+                                <span class="ml-2">{{ item.label }}</span>
+                            </a>
+                        </ng-template>
+                        <ng-template #noLink>
+                            <div class="p-menuitem-link">
+                                <span [class]="item.icon"></span>
+                                <span class="ml-2">{{ item.label }}</span>
+                            </div>
+                        </ng-template>
+                    </ng-template>
+                </p-menu>
+            </a>
+        </ng-template>
+    </p-menubar>
+    </div>
+    <div class="paragraph-container">
+        <h1>Books management</h1>
+        <p>Our application allows you to easily discover new books and keep track of your reading progress. </p>
+        <p>Manage your book collection and stay organized as you explore your literary journey. </p>
+    </div>
+    <div class="button-container">
+        
+            <p-iconField iconPosition="left">
+                <p-inputIcon styleClass="pi pi-search" class="search-icon" />
+                <input class="search-input" type="text" style="width: 40vw; background-color: rgba(255, 255, 255, 0.2); border-color: white;" (keydown.enter)="onEnter()" 
+                [(ngModel)]="query" pInputText placeholder="Search for book" />
+            </p-iconField>       
+       
+    </div> 
+</div>
+
+<app-login [visible] = "visibleLogin" (closeDialog)="visibleLogin = false" />
+<app-update [visible]="visibleUpdate" (closeDialog)="visibleUpdate = false" [messages]="messages" [user]="user" />
+<router-outlet/>

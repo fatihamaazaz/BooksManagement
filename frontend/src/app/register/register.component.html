@@ -1,0 +1,24 @@
+<p-dialog header="" (onHide)="close()" [modal]="true" [(visible)]="visible">
+    <div class="text-center mb-5" style="padding: 0; margin: 0;">
+        <img src="assets/book_red.png" alt="Image" height="50" class="mb-3">
+        <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+        <span class="text-600 font-medium line-height-3">Already have an account?</span>
+        <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" (click)="visible = false; visible = true">Login</a>
+    </div>
+    <p-messages *ngIf="visibleRegisterError" [(value)]="messages" [enableService]="false" 
+        [closable]="false" />
+    <div style="padding: 15px;">
+        <form [formGroup]="registerForm" (submit)="submitRegister()">
+            <input formControlName="username" style="border-radius: 10px;" id="username" type="text" placeholder="Username" pInputText class="w-full mb-3">
+
+            <input formControlName="email" style="border-radius: 10px;" id="email" type="text" placeholder="Email" pInputText class="w-full mb-3">
+
+            <p-password formControlName="password" [feedback]="false" placeholder="Password" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%', 'border-radius': '10px' }"  [toggleMask]="true" />
+
+            <p-calendar formControlName="birthDate" [iconDisplay]="'input'" placeholder="Birth Date" [showIcon]="true" inputId="icondisplay" [inputStyle]="{'margin-top':'10px'}"/>
+
+            <button type="submit" pButton pRipple label="Sign Up" icon="pi pi-user" class="w-full" style="margin-top: 20px; border-radius: 3px;"></button>
+        </form>
+    </div>
+
+</p-dialog>

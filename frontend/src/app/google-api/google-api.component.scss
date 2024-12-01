@@ -1,0 +1,17 @@
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.surface-card {
+    min-height: 100px; /* Set a consistent minimum height */
+    height: 100%; /* Stretch to fill parent grid cell */
+    display: flex;
+    flex-direction: column; /* Arrange content vertically */
+    justify-content: space-between; /* Evenly space items */
+}
+
+

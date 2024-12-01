@@ -1,0 +1,23 @@
+<p-toast />
+<p-confirmDialog />
+<div style=" width: 70%; margin: 40px auto; margin-top: 0;">
+<p-dataView [value]="books">
+    <ng-template pTemplate="list" let-books>
+        <div class="grid grid-nogutter">
+            <div class="col-12" *ngFor="let item of books; let first = first">
+                <div class="flex flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                    <!-- Tracked Book Section -->
+                    <div class="tracked-book-container">
+                        <app-liked-book [bookId]="item.bookId"></app-liked-book>
+                    </div>
+            
+                    <!-- Button Section -->
+                    <div class="button-container">
+                        <p-button icon="pi pi-trash" (onClick)="confirm1($event,item.id)" [outlined]="true"></p-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+</div>

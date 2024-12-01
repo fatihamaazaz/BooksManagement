@@ -1,0 +1,29 @@
+<p-dialog header="Edit profile" (onHide)="close()" [modal]="true" [(visible)]="visible">
+    
+    <p-messages *ngIf="visibleError" [(value)]="messages" [enableService]="false" 
+        [closable]="false" />
+    <div style="padding: 15px;">
+        <form [formGroup]="updateForm" (submit)="submitUpdate()">
+            <label for="username" class="block text-900 font-medium mb-2">Username</label>
+            <input formControlName="username" style="border-radius: 10px;" id="username" [value] = "user?.userName" type="text" placeholder="Username" pInputText class="w-full mb-3">
+
+            <label for="email" class="block text-900 font-medium mb-2">Email</label>
+            <input formControlName="email" style="border-radius: 10px;" id="email" [value] = "user?.email" type="text" placeholder="Email" pInputText class="w-full mb-3">
+
+            <label for="password" class="block text-900 font-medium mb-2">Password</label>
+            <p-password formControlName="password" [feedback]="false"  [style]="{'width':'100%'}" [inputStyle]="{'width':'100%', 'border-radius': '10px' }"  [toggleMask]="true" />
+
+            <label for="birthDate" class="block text-900 font-medium mb-2" style="margin-top: 20px;">Birth Date</label>
+            <p-calendar formControlName="birthDate" [iconDisplay]="'input'"  [showIcon]="true" inputId="icondisplay" />
+
+            <label for="role" class="block text-900 font-medium mb-2" style="margin-top: 20px;">Role</label>
+            <input style="border-radius: 10px;" id="email" type="text" [value]="user?.role" disabled pInputText class="w-full mb-3">
+
+            
+            <button type="submit" pButton pRipple label="Save" icon="pi pi-user" style="margin-top: 20px; border-radius: 3px; float: right;"></button>
+
+            <button pButton [ngStyle]="{color: 'var(--primary-color)'}"  label="Cancel" (click) ="close()"  style="background-color: transparent; float: right; margin-right: 5px; margin-top: 20px; border-radius: 3px;"></button>
+        </form>
+    </div>
+
+</p-dialog>

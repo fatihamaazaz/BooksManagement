@@ -1,0 +1,35 @@
+.tracked-book-container {
+    flex: 1; /* Allows this container to take up remaining space */
+    display: flex;
+    align-items: center; /* Centers content vertically */
+}
+
+.steps-container {
+    width: 600px; /* Fixed width for steps */
+    display: flex;
+    justify-content: center; /* Centers steps horizontally */
+    align-items: center; /* Centers steps vertically */
+}
+
+.button-container {
+    width: 100px; /* Fixed width for the button */
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center; /* Centers the button vertically */
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    gap: 1rem; /* Adds spacing between elements */
+}
+
+::ng-deep .p-steps-number{
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+::ng-deep .p-steps-title{
+    font-weight: 400;
+    font-size: 0.9rem;
+}

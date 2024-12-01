@@ -1,0 +1,67 @@
+.app-title{
+    font-size: large;
+    margin-left: 10px;
+}
+  
+::ng-deep .p-menubar {
+    background-color: transparent !important;
+    padding-top: 10px;
+    border-color: transparent;
+    width: 80vw; /* 50% of viewport width */
+    margin: 0 auto; /* Centers the menubar horizontally */
+    display: flex; /* Enables flex layout for justify-content */
+    justify-content: center; /* Centers the content inside the menubar */
+}
+
+
+.header-container{
+    height: 50vh;  
+    width: 100vw;
+    margin: 0 auto;
+    background-color: #d72638;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: flex-end;    /* Vertically center the button */
+    height: 15vh;
+}
+
+.paragraph-container{
+    display: flex;
+    flex-direction: column; /* Stack h1 and paragraph vertically */
+    height: 25vh;
+    justify-content: flex-start;
+    text-align: center; /* Center the text inside */
+    color: white;
+}
+h1 {
+    font-size: 2.3rem;
+    margin-bottom: 18px; /* Smaller space between h1 and paragraph */
+}
+
+p {
+    font-size: 1.2rem;
+    margin: 0; /* Remove margin around paragraphs */
+}
+
+
+/* Make the placeholder text white */
+.search-input::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.search-input{
+    border-radius: 10px;
+    color: white;
+}
+
+/* Force the icon color to white */
+.search-icon ::ng-deep .pi-search {
+    color: white !important;
+}
+
+
+
