@@ -30,23 +30,6 @@ public class ClientService {
 
     String msgOfClientNotFoundException = "Client of Id %d not found";
 
-    public JwtResponseDTO AuthenticateAndGetToken(AuthRequestDTO authRequestDTO){
-        try {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(), authRequestDTO.getPassword()));
-            if (authentication.isAuthenticated()) {
-                String userName = authRequestDTO.getUsername();
-                Long clientId = clientRepository.findClientByUserName(userName).get().getId();
-                return JwtResponseDTO.builder()
-                        .accessToken(jwtService.GenerateToken(userName, clientId)).build();
-            } else {
-                throw new ClientNotFoundException("invalid user request..!!");
-            }
-        }
-         catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Nom d'utilisateur ou mot de passe incorrect ", e);
-        }
-    }
-
     public <T> T getClientById(Long id, Class<T> targetClass){
         Client client = clientRepository.findClientById(id).orElseThrow(() ->
                 new ClientNotFoundException(String.format(msgOfClientNotFoundException, id)));
@@ -59,6 +42,8 @@ public class ClientService {
 
     public Client addClient(RegisterDTO newClient){
         Client client = clientMapping.mapToClient(newClient);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        client.setPassword(encoder.encode(newClient.getPassword()));
         client.setRole(Role.USER);
         return clientRepository.save(client);
     }
@@ -77,7 +62,7 @@ public class ClientService {
     }
 
     public void deleteClient(Long id){
-        if(clientRepository.existsById(id)){
+        if(!clientRepository.existsById(id)){
             throw new ClientNotFoundException(String.format(msgOfClientNotFoundException, id));
         }
         clientRepository.deleteClientById(id);

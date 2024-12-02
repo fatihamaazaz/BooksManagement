@@ -2,6 +2,7 @@ package com.project.books.management.controllers;
 
 
 import com.project.books.management.components.ClientService;
+import com.project.books.management.components.JwtAuthService;
 import com.project.books.management.components.JwtService;
 import com.project.books.management.configuration.SecurityConfig;
 import com.project.books.management.dto.*;
@@ -25,14 +26,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin("http://localhost:4200")
 public class ClientController {
+
     private final ClientService clientService;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
-    private final ClientRepository clientRepository;
+    private final JwtAuthService jwtAuthService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponseDTO> AuthenticateAndGetToken(@RequestBody @Valid AuthRequestDTO authRequestDTO){
-        return new ResponseEntity<>(clientService.AuthenticateAndGetToken(authRequestDTO), HttpStatus.OK);
+        return new ResponseEntity<>(jwtAuthService.AuthenticateAndGetToken(authRequestDTO), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -50,8 +51,6 @@ public class ClientController {
 
     @PostMapping("/register")
     public ResponseEntity<Client> createClient(@RequestBody @Valid RegisterDTO client){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        client.setPassword(encoder.encode(client.getPassword()));
         return new ResponseEntity<>(clientService.addClient(client), HttpStatus.CREATED);
     }
 
