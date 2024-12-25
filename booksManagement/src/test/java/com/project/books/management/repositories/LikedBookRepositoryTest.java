@@ -3,6 +3,7 @@ package com.project.books.management.repositories;
 import com.project.books.management.entities.Client;
 import com.project.books.management.entities.LikedBook;
 import com.project.books.management.entities.Role;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ class LikedBookRepositoryTest {
         this.likedBook = underTestRepository.save(new LikedBook("gtrffs", client));
     }
 
+    @AfterEach
+    void tearDown() {
+        clientRepository.delete(client);
+        underTestRepository.delete(likedBook);
+    }
 
     @Test
     void shouldDeleteLikedBookByExistingBookId() {

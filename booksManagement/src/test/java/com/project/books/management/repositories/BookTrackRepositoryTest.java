@@ -1,6 +1,7 @@
 package com.project.books.management.repositories;
 
 import com.project.books.management.entities.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ class BookTrackRepositoryTest {
         this.client = clientRepository.save(new Client("fm", "f@gmail.com","pass",
                 LocalDate.of(2000,1,1), Role.USER));
         this.track = underTestRepository.save(new BookTrack("gtrffs", client));
+    }
+
+    @AfterEach
+    void tearDown() {
+        clientRepository.delete(client);
+        underTestRepository.delete(track);
     }
 
 

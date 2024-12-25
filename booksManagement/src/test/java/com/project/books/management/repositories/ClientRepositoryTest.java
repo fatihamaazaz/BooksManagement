@@ -4,6 +4,7 @@ import com.project.books.management.dto.BookTrackDTO;
 import com.project.books.management.dto.LikedBookDTO;
 import com.project.books.management.dto.RatingDTO;
 import com.project.books.management.entities.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,14 @@ class ClientRepositoryTest {
         this.likedBook= likedBookRepository.save(new LikedBook("gtrffs", client));
         this.track = bookTrackRepository.save(new BookTrack("gtrffs", client));
         this.rating = ratingRepository.save(new Rating("gtrffs", 4, this.client));
+    }
+
+    @AfterEach
+    void tearDown() {
+        underTestRepository.delete(client);
+        likedBookRepository.delete(likedBook);
+        bookTrackRepository.delete(track);
+        ratingRepository.delete(rating);
     }
 
     @Test

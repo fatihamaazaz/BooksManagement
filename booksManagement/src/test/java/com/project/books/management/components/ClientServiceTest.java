@@ -37,7 +37,7 @@ class ClientServiceTest{
 
     @AfterEach
     void tearDown() {
-        clientRepository.delete(client);
+        clientRepository.deleteAll();
     }
 
     @Test

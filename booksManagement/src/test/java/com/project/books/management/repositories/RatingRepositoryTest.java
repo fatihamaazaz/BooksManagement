@@ -5,6 +5,7 @@ import com.project.books.management.entities.BookTrack;
 import com.project.books.management.entities.Client;
 import com.project.books.management.entities.Rating;
 import com.project.books.management.entities.Role;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ class RatingRepositoryTest {
         this.client = clientRepository.save(new Client("fm", "f@gmail.com","pass",
                 LocalDate.of(2000,1,1), Role.USER));
         this.rating = underTestRepository.save(new Rating("gtrffs", 4,client));
+    }
+
+    @AfterEach
+    void tearDown() {
+        clientRepository.delete(client);
+        underTestRepository.delete(rating);
     }
 
     @Test
